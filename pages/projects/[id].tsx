@@ -50,7 +50,11 @@ const ProjectDetail = () => {
   const handleTaskUpdate = () => {
     const fetchTasks = async () => {
       try {
-        const tasksResponse = await axiosInstance.get(`/projects/${id}/tasks`);
+        const tasksResponse = await axiosInstance.get(`/projects/${id}/tasks`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setTasks(tasksResponse.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);

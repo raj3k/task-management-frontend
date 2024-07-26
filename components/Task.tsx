@@ -3,6 +3,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import axiosInstance from '../lib/axios';
 
 interface TaskProps {
   task: { id: number; title: string; description?: string; completed: boolean };
@@ -14,7 +15,7 @@ const Task: React.FC<TaskProps> = ({ task, onUpdate }) => {
 
   const handleToggle = async () => {
     try {
-      await axios.patch(`http://localhost:3000/api/tasks/${task.id}/`, { completed: !completed });
+      await axiosInstance.put(`/tasks/${task.id}/`, { completed: !completed });
       setCompleted(!completed);
       onUpdate();
     } catch (error) {
